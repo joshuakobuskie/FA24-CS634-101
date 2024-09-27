@@ -1242,7 +1242,7 @@ print("You have selected dataset {}: {}".format(dataSelect, datasets[dataSelect-
 # The user is prompted to enter an integer value between 1 and 100 on the command line to select the minimum support. If a value outside of this range or a non-integer value is entered, an error is created and the program terminates.
 
 # %%
-support = input("Please select the Minimum Support Level in % (value 1 to 100):\n")
+support = input("Please select the minimum support level in % (value 1 to 100):\n")
 
 # Confirm selection is valid
 try:
@@ -1254,14 +1254,14 @@ except ValueError:
     print("Invalid input. Please restart and enter a valid support level.")
     raise SystemExit
 
-print("You have selected a support level of {}%".format(support))
+print("You have selected a minimum support level of {}%".format(support))
 
 # %% [markdown]
 # ### Determination of Confidence: ###
 # The user is prompted to enter an integer value between 1 and 100 on the command line to select the minimum confidence. If a value outside of this range or a non-integer value is entered, an error is created and the program terminates.
 
 # %%
-confidence = input("Please select the Minimum Confidence Level in % (value 1 to 100):\n")
+confidence = input("Please select the minimum confidence level in % (value 1 to 100):\n")
 
 # Confirm selection is valid
 try:
@@ -1273,7 +1273,7 @@ except ValueError:
     print("Invalid input. Please restart and enter a valid confidence level.")
     raise SystemExit
 
-print("You have selected a confidence level of {}%".format(confidence))
+print("You have selected a minimum confidence level of {}%".format(confidence))
 
 # %% [markdown]
 # ### Data Loading and Preprocessing: ###
@@ -1362,15 +1362,15 @@ while (i <= len(curSet) and found > 0):
 # For each itemset identified as frequent and stored in the frequent itemsets dictionary, the frequent itemset and support value for that itemset are printed to the user on the command line.
 
 # %%
-print("\nBrute Force Frequent Items\n")
+print("\nBrute Force Frequent Itemsets\n")
 
 for i, (items, supp) in enumerate(frequentItems.items()):
-    print("Frequent Item {}: [{}]\nSupport: {:0.2f}%\n".format(i+1, ", ".join(items), supp*100))
+    print("Frequent Itemset {}: [{}]\nSupport: {:0.2f}%\n".format(i+1, ", ".join(items), supp*100))
 
 # Frequent items generated, end timing
 bruteFreqTime = time.time() - bruteFreqTime
 
-print("Generated Brute Force Frequent Items in {} seconds".format(bruteFreqTime))
+print("Generated Brute Force Frequent Itemsets in {} seconds".format(bruteFreqTime))
 
 # %% [markdown]
 # ### Iterate over Frequent Itemsets to Find Association Rules: ###
@@ -1408,7 +1408,7 @@ for itemset in frequentItems:
 print("\nBrute Force Association Rules\n")
 
 for i in range(len(associationRules)):
-    print("Rule {}: [{}] -> [{}]\nConfidence: {:0.2f}%\nSupport: {:0.2f}%\n".format(i+1, ", ".join(associationRules[i][0]), ", ".join(associationRules[i][1]), associationRules[i][2]*100, associationRules[i][3]*100))
+    print("Association Rule {}: [{}] -> [{}]\nConfidence: {:0.2f}%\nSupport: {:0.2f}%\n".format(i+1, ", ".join(associationRules[i][0]), ", ".join(associationRules[i][1]), associationRules[i][2]*100, associationRules[i][3]*100))
 
 # Association rules generated, end timing
 bruteRuleTime = time.time() - bruteRuleTime
@@ -1462,14 +1462,14 @@ aprioriFreqTime = time.time()
 
 aprioriFreqItems = mlxtend.frequent_patterns.apriori(transDF, min_support=support, use_colnames=True)
 
-print("\nApriori Frequent Items\n")
+print("\nApriori Frequent Itemsets\n")
 
 for index, row in aprioriFreqItems.iterrows():
-    print("Frequent Item {}: [{}]\nSupport: {:0.2f}%\n".format(index+1, ", ".join(row["itemsets"]), row["support"]*100))
+    print("Frequent Itemset {}: [{}]\nSupport: {:0.2f}%\n".format(index+1, ", ".join(row["itemsets"]), row["support"]*100))
 
 aprioriFreqTime =  time.time() - aprioriFreqTime
 
-print("Generated Apriori Frequent Items in {} seconds".format(aprioriFreqTime))
+print("Generated Apriori Frequent Itemsets in {} seconds".format(aprioriFreqTime))
 
 # %%
 aprioriRulesTime = time.time()
@@ -1482,7 +1482,7 @@ else:
 print("\nApriori Association Rules\n")
 
 for index, row in aprioriRules.iterrows():
-    print("Rule {}: [{}] -> [{}]\nConfidence: {:0.2f}%\nSupport: {:0.2f}%\n".format(index+1, ", ".join(row["antecedents"]), ", ".join(row["consequents"]), row["confidence"]*100, row["support"]*100))
+    print("Association Rule {}: [{}] -> [{}]\nConfidence: {:0.2f}%\nSupport: {:0.2f}%\n".format(index+1, ", ".join(row["antecedents"]), ", ".join(row["consequents"]), row["confidence"]*100, row["support"]*100))
 
 aprioriRulesTime = time.time() - aprioriRulesTime
 
@@ -1495,14 +1495,14 @@ fpFreqTime = time.time()
 
 fpFreqItems = mlxtend.frequent_patterns.fpgrowth(transDF, min_support=support, use_colnames=True)
 
-print("\nFP-Growth Frequent Items\n")
+print("\nFP-Growth Frequent Itemsets\n")
 
 for index, row in fpFreqItems.iterrows():
-    print("Frequent Item {}: [{}]\nSupport: {:0.2f}%\n".format(index+1, ", ".join(row["itemsets"]), row["support"]*100))
+    print("Frequent Itemset {}: [{}]\nSupport: {:0.2f}%\n".format(index+1, ", ".join(row["itemsets"]), row["support"]*100))
 
 fpFreqTime =  time.time() - fpFreqTime
 
-print("Generated FP-Growth Frequent Items in {} seconds".format(fpFreqTime))
+print("Generated FP-Growth Frequent Itemsets in {} seconds".format(fpFreqTime))
 
 # %%
 fpRulesTime = time.time()
@@ -1515,7 +1515,7 @@ else:
 print("\nFP-Growth Association Rules\n")
 
 for index, row in fpRules.iterrows():
-    print("Rule {}: [{}] -> [{}]\nConfidence: {:0.2f}%\nSupport: {:0.2f}%\n".format(index+1, ", ".join(row["antecedents"]), ", ".join(row["consequents"]), row["confidence"]*100, row["support"]*100))
+    print("Association Rule {}: [{}] -> [{}]\nConfidence: {:0.2f}%\nSupport: {:0.2f}%\n".format(index+1, ", ".join(row["antecedents"]), ", ".join(row["consequents"]), row["confidence"]*100, row["support"]*100))
 
 fpRulesTime = time.time() - fpRulesTime
 
